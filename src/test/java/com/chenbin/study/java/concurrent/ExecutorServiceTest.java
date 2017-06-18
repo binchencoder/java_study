@@ -1,26 +1,132 @@
 package com.chenbin.study.java.concurrent;
 
-import org.junit.Test;
+import com.chenbin.study.java.concurrent.utils.ThreadPool;
 
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
+import org.junit.Test;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
+import java.util.concurrent.*;
 
 /**
  * Created by chenbin on 2017/6/13.
  */
 public class ExecutorServiceTest {
+	private static final Logger logger = LoggerFactory.getLogger(ExecutorServiceTest.class);
 
-    @Test
-    public void simpleTest() {
-        ExecutorService executorService = Executors.newFixedThreadPool(10);
+	ExecutorService executorService = Executors.newFixedThreadPool(10);
 
-        executorService.execute(new Runnable() {
-            @Override
-            public void run() {
-                System.out.println("Asynchronous task");
-            }
-        });
+	@Test
+	public void executeRunnable() {
+		executorService.execute(new Runnable() {
+			@Override
+			public void run() {
+				System.out.println("Asynchronous task");
+			}
+		});
+		executorService.shutdown();
+	}
 
-        executorService.shutdown();
-    }
+	@Test
+	public void submitRunnable() throws ExecutionException, InterruptedException {
+		String printStr = "Asynchronous task";
+
+		Future future = executorService.submit(new Runnable() {
+			@Override
+			public void run() {
+				System.out.println(printStr);
+				try {
+					Thread.sleep(5000l);
+				} catch (InterruptedException e) {
+					e.printStackTrace();
+				}
+			}
+		});
+
+		System.out.println(future.get()); // 阻塞
+	}
+
+	@Test
+	public void submitCallable() throws InterruptedException, ExecutionException {
+		ExecutorService executor = ThreadPool.getThreadPoolExecutor();
+
+		List<Callable<Object>> callables = new ArrayList<>();
+		callables.add(new Callable<Object>() {
+			@Override
+			public Object call() throws Exception {
+				System.err.println("Task 1");
+				Thread.sleep(1000l);
+				return "Task 1";
+			}
+		});
+		callables.add(new Callable<Object>() {
+			@Override
+			public Object call() throws Exception {
+				System.err.println("Task 2");
+				Thread.sleep(2000l);
+				return "Task 2";
+			}
+		});
+		callables.add(new Callable<Object>() {
+			@Override
+			public Object call() throws Exception {
+				System.err.println("Task 3");
+				Thread.sleep(1000l);
+				return "Task 3";
+			}
+		});
+		callables.add(new Callable<Object>() {
+			@Override
+			public Object call() throws Exception {
+				System.err.println("Task 4");
+				Thread.sleep(1000l);
+				return "Task 4";
+			}
+		});
+
+		long startTime = System.currentTimeMillis();
+		List<Future<Object>> futures = executor.invokeAll(callables);
+		for (Future<Object> result : futures) {
+			System.out.println(result.get());
+		}
+		long endTime = System.currentTimeMillis();
+
+		logger.info("Cost time:{}", (startTime - endTime));
+	}
+
+	@Test
+	public void invokeAny() throws ExecutionException, InterruptedException {
+		Set<Callable<String>> callables = new HashSet<Callable<String>>();
+
+		callables.add(new Callable<String>() {
+			@Override
+			public String call() throws Exception {
+				System.out.println("return task1");
+				return "Task1";
+			}
+		});
+		callables.add(new Callable<String>() {
+			@Override
+			public String call() throws Exception {
+				System.out.println("return task2");
+				return "Task2";
+			}
+		});
+		callables.add(new Callable<String>() {
+			@Override
+			public String call() throws Exception {
+				System.out.println("return task3");
+				return "Task3";
+			}
+		});
+
+		String result = executorService.invokeAny(callables);
+		System.out.println("result=" + result);
+	}
+
+
 }
