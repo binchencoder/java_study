@@ -3,11 +3,11 @@
 	<modelVersion>4.0.0</modelVersion>
 
 	<groupId>com.chenbin.study</groupId>
-	<artifactId>java-study</artifactId>
+	<artifactId>java_study</artifactId>
 	<version>1.0-SNAPSHOT</version>
 	<packaging>jar</packaging>
 
-	<name>java-study</name>
+	<name>java_study</name>
 	<url>http://maven.apache.org</url>
 
 	<properties>
