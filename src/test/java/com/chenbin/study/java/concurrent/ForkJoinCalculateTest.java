@@ -16,6 +16,8 @@ public class ForkJoinCalculateTest {
 
   private static final long END_VALUE = 10000000000L;
 
+  public final static ForkJoinPool pool = new ForkJoinPool();
+
   @BeforeMethod
   public void setUp() throws Exception {
 
@@ -34,7 +36,6 @@ public class ForkJoinCalculateTest {
   public void testForkJoinTask() {
     Instant start = Instant.now();
 
-    ForkJoinPool pool = new ForkJoinPool();
     ForkJoinTask<Long> task = new ForkJoinCalculate(0, END_VALUE);
 
     Long sum = pool.invoke(task);

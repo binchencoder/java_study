@@ -7,6 +7,8 @@ import java.util.concurrent.RecursiveTask;
  */
 public class ForkJoinCalculate extends RecursiveTask<Long> {
 
+  private static final long serialVersionUID = 1L;
+
   private long start;
   private long end;
 
