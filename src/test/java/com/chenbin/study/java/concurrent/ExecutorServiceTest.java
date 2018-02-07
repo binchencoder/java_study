@@ -16,117 +16,117 @@ import java.util.concurrent.*;
  * Created by chenbin on 2017/6/13.
  */
 public class ExecutorServiceTest {
-	private static final Logger logger = LoggerFactory.getLogger(ExecutorServiceTest.class);
 
-	ExecutorService executorService = Executors.newFixedThreadPool(10);
+  private static final Logger logger = LoggerFactory.getLogger(ExecutorServiceTest.class);
 
-	@Test
-	public void executeRunnable() {
-		executorService.execute(new Runnable() {
-			@Override
-			public void run() {
-				System.out.println("Asynchronous task");
-			}
-		});
-		executorService.shutdown();
-	}
+  ExecutorService executorService = Executors.newFixedThreadPool(10);
 
-	@Test
-	public void submitRunnable() throws ExecutionException, InterruptedException {
-		String printStr = "Asynchronous task";
+  @Test
+  public void executeRunnable() {
+    executorService.execute(new Runnable() {
+      @Override
+      public void run() {
+        System.out.println("Asynchronous task");
+      }
+    });
+    executorService.shutdown();
+  }
 
-		Future future = executorService.submit(new Runnable() {
-			@Override
-			public void run() {
-				System.out.println(printStr);
-				try {
-					Thread.sleep(5000l);
-				} catch (InterruptedException e) {
-					e.printStackTrace();
-				}
-			}
-		});
+  @Test
+  public void submitRunnable() throws ExecutionException, InterruptedException {
+    String printStr = "Asynchronous task";
 
-		System.out.println(future.get()); // 阻塞
-	}
+    Future future = executorService.submit(new Runnable() {
+      @Override
+      public void run() {
+        System.out.println(printStr);
+        try {
+          Thread.sleep(5000l);
+        } catch (InterruptedException e) {
+          e.printStackTrace();
+        }
+      }
+    });
 
-	@Test
-	public void submitCallable() throws InterruptedException, ExecutionException {
-		ExecutorService executor = ThreadPool.getThreadPoolExecutor();
+    System.out.println(future.get()); // 阻塞
+  }
 
-		List<Callable<Object>> callables = new ArrayList<>();
-		callables.add(new Callable<Object>() {
-			@Override
-			public Object call() throws Exception {
-				System.err.println("Task 1");
-				Thread.sleep(1000l);
-				return "Task 1";
-			}
-		});
-		callables.add(new Callable<Object>() {
-			@Override
-			public Object call() throws Exception {
-				System.err.println("Task 2");
-				Thread.sleep(2000l);
-				return "Task 2";
-			}
-		});
-		callables.add(new Callable<Object>() {
-			@Override
-			public Object call() throws Exception {
-				System.err.println("Task 3");
-				Thread.sleep(1000l);
-				return "Task 3";
-			}
-		});
-		callables.add(new Callable<Object>() {
-			@Override
-			public Object call() throws Exception {
-				System.err.println("Task 4");
-				Thread.sleep(1000l);
-				return "Task 4";
-			}
-		});
+  @Test
+  public void submitCallable() throws InterruptedException, ExecutionException {
+    ExecutorService executor = ThreadPool.getThreadPoolExecutor();
 
-		long startTime = System.currentTimeMillis();
-		List<Future<Object>> futures = executor.invokeAll(callables);
-		for (Future<Object> result : futures) {
-			System.out.println(result.get());
-		}
-		long endTime = System.currentTimeMillis();
+    List<Callable<Object>> callables = new ArrayList<>();
+    callables.add(new Callable<Object>() {
+      @Override
+      public Object call() throws Exception {
+        System.err.println("Task 1");
+        Thread.sleep(1000l);
+        return "Task 1";
+      }
+    });
+    callables.add(new Callable<Object>() {
+      @Override
+      public Object call() throws Exception {
+        System.err.println("Task 2");
+        Thread.sleep(2000l);
+        return "Task 2";
+      }
+    });
+    callables.add(new Callable<Object>() {
+      @Override
+      public Object call() throws Exception {
+        System.err.println("Task 3");
+        Thread.sleep(1000l);
+        return "Task 3";
+      }
+    });
+    callables.add(new Callable<Object>() {
+      @Override
+      public Object call() throws Exception {
+        System.err.println("Task 4");
+        Thread.sleep(1000l);
+        return "Task 4";
+      }
+    });
 
-		logger.info("Cost time:{}", (startTime - endTime));
-	}
+    long startTime = System.currentTimeMillis();
+    List<Future<Object>> futures = executor.invokeAll(callables);
+    for (Future<Object> result : futures) {
+      System.out.println(result.get());
+    }
+    long endTime = System.currentTimeMillis();
 
-	@Test
-	public void invokeAny() throws ExecutionException, InterruptedException {
-		Set<Callable<String>> callables = new HashSet<Callable<String>>();
+    logger.info("Cost time:{}", (startTime - endTime));
+  }
 
-		callables.add(new Callable<String>() {
-			@Override
-			public String call() throws Exception {
-				System.out.println("return task1");
-				return "Task1";
-			}
-		});
-		callables.add(new Callable<String>() {
-			@Override
-			public String call() throws Exception {
-				System.out.println("return task2");
-				return "Task2";
-			}
-		});
-		callables.add(new Callable<String>() {
-			@Override
-			public String call() throws Exception {
-				System.out.println("return task3");
-				return "Task3";
-			}
-		});
+  @Test
+  public void invokeAny() throws ExecutionException, InterruptedException {
+    Set<Callable<String>> callables = new HashSet<Callable<String>>();
 
-		String result = executorService.invokeAny(callables);
-		System.out.println("result=" + result);
-	}
+    callables.add(new Callable<String>() {
+      @Override
+      public String call() throws Exception {
+        System.out.println("return task1");
+        return "Task1";
+      }
+    });
+    callables.add(new Callable<String>() {
+      @Override
+      public String call() throws Exception {
+        System.out.println("return task2");
+        return "Task2";
+      }
+    });
+    callables.add(new Callable<String>() {
+      @Override
+      public String call() throws Exception {
+        System.out.println("return task3");
+        return "Task3";
+      }
+    });
 
+    String result = executorService.invokeAny(callables);
 
+    System.out.println("result=" + result);
+  }
 }
