@@ -12,6 +12,8 @@ import java.util.List;
 import java.util.Set;
 import java.util.concurrent.*;
 
+import static java.lang.Thread.*;
+
 /**
  * Created by chenbin on 2017/6/13.
  */
@@ -40,7 +42,7 @@ public class ExecutorServiceTest {
 			public void run() {
 				System.out.println(printStr);
 				try {
-					Thread.sleep(5000l);
+					sleep(5000l);
 				} catch (InterruptedException e) {
 					e.printStackTrace();
 				}
@@ -51,7 +53,25 @@ public class ExecutorServiceTest {
 	}
 
 	@Test
-	public void submitCallable() throws InterruptedException, ExecutionException {
+	public void submitCallable() {
+		ExecutorService executor = ThreadPool.getThreadPoolExecutor();
+
+		Callable<Object> callable = new Callable<Object>() {
+			@Override
+			public Object call() throws Exception {
+				sleep(2000l);
+				System.err.println("Task 1");
+
+				return "Task 1";
+			}
+		};
+		executor.submit(callable);
+
+		System.out.println("Submit callable");
+	}
+
+	@Test
+	public void invokeAllCallable() throws InterruptedException, ExecutionException {
 		ExecutorService executor = ThreadPool.getThreadPoolExecutor();
 
 		List<Callable<Object>> callables = new ArrayList<>();
@@ -59,7 +79,7 @@ public class ExecutorServiceTest {
 			@Override
 			public Object call() throws Exception {
 				System.err.println("Task 1");
-				Thread.sleep(1000l);
+				sleep(1000l);
 				return "Task 1";
 			}
 		});
@@ -67,7 +87,7 @@ public class ExecutorServiceTest {
 			@Override
 			public Object call() throws Exception {
 				System.err.println("Task 2");
-				Thread.sleep(2000l);
+				sleep(2000l);
 				return "Task 2";
 			}
 		});
@@ -75,7 +95,7 @@ public class ExecutorServiceTest {
 			@Override
 			public Object call() throws Exception {
 				System.err.println("Task 3");
-				Thread.sleep(1000l);
+				sleep(1000l);
 				return "Task 3";
 			}
 		});
@@ -83,7 +103,7 @@ public class ExecutorServiceTest {
 			@Override
 			public Object call() throws Exception {
 				System.err.println("Task 4");
-				Thread.sleep(1000l);
+				sleep(1000l);
 				return "Task 4";
 			}
 		});
