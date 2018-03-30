@@ -1,4 +1,4 @@
-package com.chenbin.study.java.hashcode;
+package com.chenbin.study.hashcode;
 
 /**
  * Created by chenbin on 18-2-7.

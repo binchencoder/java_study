@@ -1,8 +1,8 @@
-package com.chenbin.study.java.concurrent;
+package com.chenbin.study.concurrent;
 
 import static java.lang.Thread.sleep;
 
-import com.chenbin.study.java.concurrent.utils.ThreadPool;
+import com.chenbin.study.concurrent.utils.ThreadPool;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;

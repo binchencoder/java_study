@@ -1,6 +1,6 @@
-package com.chenbin.study.java.concurrent.utils;
+package com.chenbin.study.concurrent.utils;
 
-import com.chenbin.study.java.concurrent.TaskExecutorService;
+import com.chenbin.study.concurrent.TaskExecutorService;
 
 import java.util.concurrent.*;
 

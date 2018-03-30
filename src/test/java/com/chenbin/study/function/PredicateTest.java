@@ -1,4 +1,4 @@
-package com.chenbin.study.java.function;
+package com.chenbin.study.function;
 
 import java.util.List;
 import java.util.function.Predicate;

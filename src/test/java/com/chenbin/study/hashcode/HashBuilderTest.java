@@ -1,4 +1,4 @@
-package com.chenbin.study.java.hashcode;
+package com.chenbin.study.hashcode;
 
 import org.junit.Test;
 

@@ -1,4 +1,4 @@
-package com.chenbin.study.java.concurrent;
+package com.chenbin.study.concurrent;
 
 import java.time.Duration;
 import java.time.Instant;
