@@ -1,4 +1,4 @@
-package com.chenbin.study.concurrent;
+package com.chenbin.study.concurrent.executor;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

@@ -1,4 +1,4 @@
-package com.chenbin.study.concurrent;
+package com.chenbin.study.concurrent.thread;
 
 import java.util.ArrayList;
 import java.util.List;

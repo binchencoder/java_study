@@ -24,7 +24,7 @@
 		<org.testng-verison>6.8</org.testng-verison>
 		<org.hamcrest-version>1.1</org.hamcrest-version>
 
-		<springframework.version>5.0.3.RELEASE</springframework.version>
+		<springframework.version>4.2.5.RELEASE</springframework.version>
 	</properties>
 
 	<dependencies>
@@ -65,7 +65,7 @@
 			<version>${springframework.version}</version>
 		</dependency>
 
-		<!-- logger dependencies settings -->
+		<!-- Logger Dependencies -->
 		<dependency>
 			<groupId>ch.qos.logback</groupId>
 			<artifactId>logback-classic</artifactId>
@@ -93,6 +93,11 @@
 			<groupId>org.apache.commons</groupId>
 			<artifactId>commons-lang3</artifactId>
 			<version>3.4</version>
+		</dependency>
+		<dependency>
+			<groupId>com.google.guava</groupId>
+			<artifactId>guava</artifactId>
+			<version>24.1-jre</version>
 		</dependency>
 
 		<!-- Test Dependencies -->

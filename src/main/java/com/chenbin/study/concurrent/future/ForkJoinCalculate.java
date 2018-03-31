@@ -1,4 +1,4 @@
-package com.chenbin.study.concurrent;
+package com.chenbin.study.concurrent.future;
 
 import java.util.concurrent.RecursiveTask;
 
