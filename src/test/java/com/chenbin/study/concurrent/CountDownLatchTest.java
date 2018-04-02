@@ -50,33 +50,33 @@ public class CountDownLatchTest {
   @Test
   public void testAsyncExecSuccedOfCountDown() {
     List<String> options = Lists.newArrayList("1", "2", "3");
+    long start = System.currentTimeMillis();
+
     CountDownLatch latch = new CountDownLatch(options.size());
 
-    options.stream().forEach(op -> {
-      CompletableFuture.runAsync(() -> {
-        try {
-          switch (op) {
-            case "1":
-              Thread.sleep(1000L);
-              System.out.println("Get 1");
-              break;
-            case "2":
-              Thread.sleep(2000L);
-              System.out.println("Get 2");
-              break;
-            case "3":
-              Thread.sleep(3000L);
-              System.out.println("Get 3");
-              break;
-            default:
-              break;
-          }
-        } catch (Exception ex) {
-        } finally {
-          latch.countDown();
+    options.stream().forEach(op -> CompletableFuture.runAsync(() -> {
+      try {
+        switch (op) {
+          case "1":
+            Thread.sleep(1000L);
+            System.out.println("Get 1");
+            break;
+          case "2":
+            Thread.sleep(2000L);
+            System.out.println("Get 2");
+            break;
+          case "3":
+            Thread.sleep(3000L);
+            System.out.println("Get 3");
+            break;
+          default:
+            break;
         }
-      });
-    });
+      } catch (Exception ex) {
+      } finally {
+        latch.countDown();
+      }
+    }));
 
     try {
       latch.await();
@@ -84,6 +84,7 @@ public class CountDownLatchTest {
       e.printStackTrace();
     }
 
+    System.out.println("Cost time:" + (System.currentTimeMillis() - start));
     System.out.println("Over");
   }
 }
