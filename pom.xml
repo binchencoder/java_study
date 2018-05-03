@@ -16,19 +16,23 @@
 		<maven.compiler.encoding>UTF-8</maven.compiler.encoding>
 		<java.version>1.8</java.version>
 
-		<!-- logger version settings -->
+		<!-- Logger dependency versions -->
 		<org.slf4j-version>1.6.3</org.slf4j-version>
 		<logback-version>1.1.2</logback-version>
 
-		<!-- testing version settings -->
+		<!-- Testing dependency versions -->
 		<org.testng-verison>6.8</org.testng-verison>
 		<org.hamcrest-version>1.1</org.hamcrest-version>
 
+		<!-- Spring framework dependency versions -->
 		<springframework.version>4.2.5.RELEASE</springframework.version>
+
+		<!-- Google guava dependency versions -->
+		<google.guava.version>24.1.1-jre</google.guava.version>
 	</properties>
 
 	<dependencies>
-		<!-- Spring Dependencies -->
+		<!-- Spring Framework -->
 		<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-core</artifactId>
@@ -65,7 +69,7 @@
 			<version>${springframework.version}</version>
 		</dependency>
 
-		<!-- Logger Dependencies -->
+		<!-- Logging -->
 		<dependency>
 			<groupId>ch.qos.logback</groupId>
 			<artifactId>logback-classic</artifactId>
@@ -77,18 +81,18 @@
 			<artifactId>slf4j-api</artifactId>
 			<version>1.7.10</version>
 		</dependency>
-		<dependency>
+		<!--<dependency>
 			<groupId>org.slf4j</groupId>
 			<artifactId>slf4j-log4j12</artifactId>
 			<version>1.7.10</version>
-		</dependency>
+		</dependency>-->
 		<dependency>
 			<groupId>commons-logging</groupId>
 			<artifactId>commons-logging</artifactId>
 			<version>1.2</version>
 		</dependency>
 
-		<!-- Commons Dependencies -->
+		<!-- Third Party -->
 		<dependency>
 			<groupId>org.apache.commons</groupId>
 			<artifactId>commons-lang3</artifactId>
@@ -97,10 +101,10 @@
 		<dependency>
 			<groupId>com.google.guava</groupId>
 			<artifactId>guava</artifactId>
-			<version>24.1-jre</version>
+			<version>${google.guava.version}</version>
 		</dependency>
 
-		<!-- Test Dependencies -->
+		<!-- Testing -->
 		<dependency>
 			<groupId>org.testng</groupId>
 			<artifactId>testng</artifactId>
