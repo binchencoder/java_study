@@ -20,7 +20,7 @@ public class GuavaTest {
 
   @BeforeClass
   public static void init() {
-    for (int i = 0; i < 100; i++) {
+    for (int i = 0; i < 1300; i++) {
       lst.add("guava." + i);
     }
 
@@ -29,7 +29,7 @@ public class GuavaTest {
 
   @Test
   public void partitionTest() {
-    int partitionSize = IntMath.divide(lst.size(), 30, RoundingMode.DOWN);
+    int partitionSize = IntMath.divide(lst.size(), lst.size() / 100, RoundingMode.UP);
     List<List<String>> partitions = Lists.partition(lst, partitionSize);
 
     logger.debug("partitionSize: {}, partitions:{}", partitionSize, partitions);
