@@ -48,7 +48,7 @@ public class PredicateTest {
     System.out.println(integer);
   }
 
-  public static void filter(List<String> names, Predicate condition) {
+  public static void filter(List<String> names, Predicate<String> condition) {
     for (String name : names) {
       if (condition.test(name)) {
         System.out.println(name + "");
