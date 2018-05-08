@@ -1,10 +1,8 @@
 package com.chenbin.study.concurrent;
 
 import com.google.common.collect.Lists;
-import java.io.InvalidClassException;
 import java.util.List;
 import java.util.concurrent.CompletableFuture;
-import java.util.concurrent.CompletionException;
 import java.util.concurrent.CountDownLatch;
 import org.junit.Test;
 
@@ -50,12 +48,11 @@ public class CountDownLatchTest {
   }
 
   @Test
-  public void testAsyncExecSuccedOfCountDown() throws Exception {
+  public void testAsyncExecSuccedOfCountDown() {
     List<String> options = Lists.newArrayList("1", "2", "3");
     long start = System.currentTimeMillis();
 
     CountDownLatch latch = new CountDownLatch(options.size());
-
     CompletableFuture completableFuture = new CompletableFuture<>();
     options.stream().forEach(op -> {
       completableFuture.supplyAsync(() -> {
@@ -66,7 +63,7 @@ public class CountDownLatchTest {
               System.out.println("Get 1");
               break;
             case "2":
-              throwException();
+//              throwException();
               Thread.sleep(2000L);
               System.out.println("Get 2");
               break;
@@ -83,10 +80,19 @@ public class CountDownLatchTest {
         } finally {
           latch.countDown();
         }
+
+        completableFuture.complete(op);
         return null;
       });
     });
 
+    try {
+      completableFuture.get();
+    } catch (Exception e) {
+      throw new RuntimeException("");
+    }
+
+    /*completableFuture.get();
     boolean exceptionally = completableFuture.exceptionally(ex -> {
       System.err.println("exceptionally");
       throw new CompletionException("CompleteFuture exceptionally", (Throwable) ex);
@@ -95,9 +101,10 @@ public class CountDownLatchTest {
     System.err.println("CompletableFuture exceptionally is: " + exceptionally);
     if (exceptionally) {
       throw new RuntimeException("");
-    }
+    }*/
 
-    /*options.stream().forEach(op -> {
+    /*
+    options.stream().forEach(op -> {
       CompletableFuture completableFuture = CompletableFuture.runAsync(() -> {
         try {
           switch (op) {
