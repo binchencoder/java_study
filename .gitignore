@@ -2,15 +2,13 @@
 target/
 test-output
 temp
-src/main/webapp/WEB_INF/classes
-src/main/webapp/WEB_INF/lib
 *.jar
+*.class
 *.war
 *.zip
 *.tar
 *.tar.gz
 classes/
-WEB-INF/lib/
 
 # eclipse ignore
 .settings/
