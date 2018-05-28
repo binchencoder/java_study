@@ -4,6 +4,7 @@ import com.google.common.collect.Lists;
 import java.util.List;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.CountDownLatch;
+import java.util.concurrent.ExecutionException;
 import org.junit.Test;
 
 /**
@@ -48,7 +49,7 @@ public class CountDownLatchTest {
   }
 
   @Test
-  public void testAsyncExecSuccedOfCountDown() {
+  public void testAsyncExecSuccedOfCountDown() throws Exception {
     List<String> options = Lists.newArrayList("1", "2", "3");
     long start = System.currentTimeMillis();
 
@@ -63,7 +64,7 @@ public class CountDownLatchTest {
               System.out.println("Get 1");
               break;
             case "2":
-//              throwException();
+              throwIllegalException();
               Thread.sleep(2000L);
               System.out.println("Get 2");
               break;
@@ -88,8 +89,9 @@ public class CountDownLatchTest {
 
     try {
       completableFuture.get();
-    } catch (Exception e) {
-      throw new RuntimeException("");
+    } catch (ExecutionException ee) { // 为了抛出详细的异常, 在捕捉之后需要做如下的处理
+      Throwable throwable = ee.getCause();
+      throw (Exception) throwable;
     }
 
     /*completableFuture.get();
@@ -153,7 +155,7 @@ public class CountDownLatchTest {
     System.out.println("Over");
   }
 
-  private void throwException() {
-    throw new RuntimeException("Occur exception");
+  private void throwIllegalException() {
+    throw new IllegalArgumentException("Occur illegal argument exception");
   }
 }
