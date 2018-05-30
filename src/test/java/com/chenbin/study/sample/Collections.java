@@ -32,4 +32,16 @@ public class Collections {
 
     System.out.println(removeItems);
   }
+
+  @Test
+  public void testRemoveIf() {
+    List<Long> lst = Lists.newArrayList(0L, 1L, 122L);
+    lst.removeIf(l -> l.equals(0L));
+
+    List<Long> empty = java.util.Collections.emptyList();
+    empty.removeIf(l -> l.equals(0L));
+    
+    System.out.println(lst);
+    System.out.println(empty);
+  }
 }
