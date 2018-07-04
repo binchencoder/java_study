@@ -1,6 +1,5 @@
 package com.chenbin.study.sample;
 
-import ch.qos.logback.core.net.SyslogOutputStream;
 import org.junit.Test;
 
 /**

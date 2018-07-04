@@ -6,11 +6,15 @@ import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.ExecutionException;
 import org.junit.Test;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * Created by chenbin on 2018/3/31.
  */
 public class CountDownLatchTest {
+
+  private static final Logger logger = LoggerFactory.getLogger(CountDownLatchTest.class);
 
   @Test
   public void testAsyncExecFailedOfCountDown() {
@@ -45,6 +49,51 @@ public class CountDownLatchTest {
 
     // 因为没有执行latch.await(), 所以异步执行失败
 
+    System.out.println("Over");
+  }
+
+  @Test
+  public void testAsyncThrowExceptionOfCountDown1() {
+    List<String> options = Lists.newArrayList("1", "2", "3");
+    long start = System.currentTimeMillis();
+
+    CountDownLatch latch = new CountDownLatch(options.size());
+
+    options.stream().forEach(op -> {
+      CompletableFuture.runAsync(() -> {
+        try {
+          switch (op) {
+            case "1":
+              Thread.sleep(1000L);
+              System.out.println("Get 1");
+              break;
+            case "2":
+              Thread.sleep(2000L);
+              this.throwIllegalException();
+              System.out.println("Get 2");
+              break;
+            case "3":
+              Thread.sleep(3000L);
+              System.out.println("Get 3");
+              break;
+            default:
+              break;
+          }
+        } catch (Exception ex) {
+          logger.error("CompletableFuture runAsync error", ex);
+        } finally {
+          latch.countDown();
+        }
+      });
+    });
+
+    try {
+      latch.await();
+    } catch (InterruptedException e) {
+      e.printStackTrace();
+    }
+
+    logger.info("Cost time: {}", System.currentTimeMillis() - start);
     System.out.println("Over");
   }
 
@@ -151,7 +200,7 @@ public class CountDownLatchTest {
       e.printStackTrace();
     }
 
-    System.out.println("Cost time:" + (System.currentTimeMillis() - start));
+    logger.info("Cost time: {}", System.currentTimeMillis() - start);
     System.out.println("Over");
   }
 
