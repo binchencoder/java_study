@@ -16,8 +16,8 @@ public class Collections {
    */
   @Test
   public void testRetainAll() {
-    List<Long> addItems = Lists.newArrayList(1L, 3L);
-    List<Long> removeItems = Lists.newArrayList(1L, 2L);
+    List<Long> addItems = Lists.newArrayList(1L, 3L, 4L, 5L);
+    List<Long> removeItems = Lists.newArrayList(1L, 5L, 4L, 2L);
     addItems.retainAll(removeItems);
 
     System.out.println(addItems);
@@ -48,7 +48,22 @@ public class Collections {
   }
 
   @Test
+  public void testSubList() {
+    List<Long> lst = Lists.newArrayList(1L, 3L, 4L, 5L, 9L, 0L);
+    System.out.println(lst.subList(2, lst.size()));
+  }
+
+  @Test
   public void test() {
     System.out.print(NumberUtils.toLong(CharMatcher.DIGIT.retainFrom("WorkFrame." + 111L)));
+  }
+
+  @Test
+  public void test1() {
+    List<Long> test = Lists.newArrayList(1L, 2L);
+    System.out.println(System.identityHashCode(test));
+
+    test = Lists.newArrayList(2L, 3L);
+    System.out.println(System.identityHashCode(test));
   }
 }
