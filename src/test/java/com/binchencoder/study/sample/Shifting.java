@@ -25,6 +25,15 @@ public class Shifting {
     printInfo(num);
   }
 
+  @Test
+  public void test1() {
+    int a = 1;
+    int b = 2;
+    int c = 3;
+
+    a |= 2;
+    System.out.println("a = " + a);
+  }
 
   /**
    * 输出一个int的二进制数
