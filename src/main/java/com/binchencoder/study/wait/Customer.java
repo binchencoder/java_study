@@ -21,8 +21,10 @@ public class Customer implements Runnable {
   public void run() {
     Random random = new Random();
     while (true) {
+      int sleepTime = random.nextInt(1010);
+      System.out.println("消费者sleep " + sleepTime + " millis");
       try {
-        Thread.sleep(random.nextInt(1010));
+        Thread.sleep(sleepTime);
 //        Thread.sleep(1000);
       } catch (InterruptedException e) {
         e.printStackTrace();
