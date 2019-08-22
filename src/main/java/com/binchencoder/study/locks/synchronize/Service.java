@@ -1,4 +1,4 @@
-package com.binchencoder.study.synchronize;
+package com.binchencoder.study.locks.synchronize;
 
 public class Service {
 

@@ -1,4 +1,4 @@
-package com.binchencoder.study.wait;
+package com.binchencoder.study.locks.wait;
 
 import java.util.ArrayList;
 import java.util.List;
