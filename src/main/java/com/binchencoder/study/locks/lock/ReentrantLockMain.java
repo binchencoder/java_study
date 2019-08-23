@@ -31,6 +31,7 @@ class Data {
 
   public void put() {
     lock.lock();
+    lock.tryLock();
 
     try {
       if (data.size() > 5) {
