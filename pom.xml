@@ -28,7 +28,7 @@
 		<springframework.version>4.2.5.RELEASE</springframework.version>
 
 		<!-- Google guava dependency versions -->
-		<google.guava.version>24.1.1-jre</google.guava.version>
+		<google.guava.version>28.1-jre</google.guava.version>
 	</properties>
 
 	<dependencies>
