@@ -77,7 +77,8 @@ public class Collections {
 
   @Test
   public void test() {
-    System.out.print(NumberUtils.toLong(CharMatcher.DIGIT.retainFrom("WorkFrame." + 111L)));
+    System.out
+        .print(NumberUtils.toLong(CharMatcher.inRange('0', '9').retainFrom("WorkFrame." + 111L)));
   }
 
   @Test
