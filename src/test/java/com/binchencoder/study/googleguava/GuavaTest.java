@@ -2,6 +2,7 @@ package com.binchencoder.study.googleguava;
 
 import com.google.common.collect.Lists;
 import com.google.common.math.IntMath;
+import com.google.common.util.concurrent.RateLimiter;
 import java.math.RoundingMode;
 import java.util.List;
 import org.junit.BeforeClass;
@@ -17,6 +18,8 @@ public class GuavaTest {
   private static final Logger logger = LoggerFactory.getLogger(GuavaTest.class);
 
   public static List<String> lst = Lists.newArrayList();
+
+  static RateLimiter rateLimiter = RateLimiter.create(2000);
 
   @BeforeClass
   public static void init() {
@@ -35,4 +38,8 @@ public class GuavaTest {
     logger.debug("partitionSize: {}, partitions:{}", partitionSize, partitions);
   }
 
+  @Test
+  public void rateLimiter() {
+    rateLimiter.tryAcquire();
+  }
 }
