@@ -1,12 +1,10 @@
 package com.binchencoder.study.sample;
 
 import com.google.common.base.CharMatcher;
-import com.google.common.collect.Collections2;
+import com.google.common.collect.Lists;
 import java.util.List;
 import org.apache.commons.lang3.math.NumberUtils;
 import org.junit.Test;
-import org.testng.collections.CollectionUtils;
-import org.testng.collections.Lists;
 
 /**
  * Created by chenbin on 18-3-30.
@@ -73,6 +71,18 @@ public class Collections {
   public void testSubList() {
     List<Long> lst = Lists.newArrayList(1L, 3L, 4L, 5L, 9L, 0L);
     System.out.println(lst.subList(2, lst.size()));
+  }
+
+  @Test
+  public void testArrayListWithCapacity() {
+    List<Long> lst = Lists.newArrayListWithCapacity(1);
+    lst.add(1L);
+    lst.add(2L);
+    lst.add(3L);
+    lst.add(5L);
+    lst.add(6L);
+
+    System.out.println(lst);
   }
 
   @Test
