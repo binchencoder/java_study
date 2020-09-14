@@ -1,5 +1,7 @@
 package com.binchencoder.study.sample;
 
+import java.util.ArrayList;
+import java.util.List;
 import org.junit.Test;
 
 /**
@@ -22,4 +24,17 @@ public class Strings {
     System.out.println(a == b);
   }
 
+  @Test
+  public void splitString() {
+    String str = "aaa,444,11,566,1232,666";
+
+    List<String> lst = new ArrayList<>();
+    int idx;
+    while ((idx = str.indexOf(",")) > -1) {
+      lst.add(str.substring(0, idx));
+      str = str.substring(idx + 1);
+    }
+
+    System.out.println(lst.toString());
+  }
 }
