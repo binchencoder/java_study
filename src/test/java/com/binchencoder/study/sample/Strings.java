@@ -1,6 +1,7 @@
 package com.binchencoder.study.sample;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import org.junit.Test;
 
@@ -36,5 +37,20 @@ public class Strings {
     }
 
     System.out.println(lst.toString());
+  }
+
+  @Test
+  public void reverseString() {
+    char[] s = new char[]{'h', 'e', 'l', 'l', 'o'};
+
+    int len = s.length;
+    char[] copyData = Arrays.copyOf(s, len);
+
+    int i = 0;
+    for (int n = len - 1; n >= 0; n--) {
+      s[i] = copyData[n];
+      i++;
+    }
+    System.out.println(s);
   }
 }
