@@ -8,6 +8,14 @@ package com.binchencoder.study.authority;
  */
 public class Authority {
 
+  public Authority() {
+
+  }
+
+  public Authority(int state) {
+    this.state = state;
+  }
+
   //新增权限
   public static final int ALLOW_INSERT = 1 << 0;
   //删除权限
@@ -59,5 +67,9 @@ public class Authority {
 
   public int getState() {
     return state;
+  }
+
+  public void setState(int state) {
+    this.state = state;
   }
 }
