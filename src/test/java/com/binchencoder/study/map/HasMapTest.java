@@ -11,7 +11,7 @@ public class HasMapTest {
 
   @Test
   public void testPut() {
-    Map<String, String> map = new HashMap<>(2);
+    Map<String, String> map = new HashMap<>(15);
     map.put("1", "1");
   }
 }

@@ -14,21 +14,22 @@ public class ReverseList {
       return head;
     }
 
-    Node p = head.getNext();
-    Node q = head.getNext().getNext();
+    // 当前节点从头节点开始遍历
+    Node curr = head;
+    // 前一个指针节点
+    Node prev = null;
 
-    Node t = null;
-    while (null != q) {
-      t = q.getNext();
-      q.setNext(p);
-      p = q;
-      q = t;
+    // 临时节点, 暂存当前节点的下一个节点, 用于后移
+    Node temp;
+    // 每次循环，都将当前节点指向它前面的节点，然后当前节点和前节点后移
+    while (null != curr) {
+      temp = curr.getNext();
+      curr.setNext(prev); // 将当前节点指向它前面的节点
+
+      prev = curr; // 前指针后移
+      curr = temp; // 当前指针后移
     }
 
-    // 设置链表尾
-    head.getNext().setNext(null);
-    // 设置链表头
-    head.setNext(p);
-    return head;
+    return prev;
   }
 }

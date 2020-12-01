@@ -27,9 +27,9 @@ public class ReverseListTest {
     printList(head);
 
     ReverseList reverseList = new ReverseList();
-    reverseList.reverseList(head);
+    Node newNode = reverseList.reverseList(head);
 
-    printList(head);
+    printList(newNode);
   }
 
   public void printList(Node node) {
