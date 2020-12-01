@@ -57,4 +57,13 @@ public class BinaryTree implements Tree {
   public boolean delete(int key) {
     return false;
   }
+
+  // 中序遍历
+  public void infixOrder(Node current) {
+    if (null != current) {
+      infixOrder(current.getLeftChild());
+      System.out.println(current.getData() + "");
+      infixOrder(current.getRightChild());
+    }
+  }
 }
