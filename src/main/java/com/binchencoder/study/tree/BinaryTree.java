@@ -62,8 +62,17 @@ public class BinaryTree implements Tree {
   public void infixOrder(Node current) {
     if (null != current) {
       infixOrder(current.getLeftChild());
-      System.out.println(current.getData() + "");
+      System.out.println(current.getData());
       infixOrder(current.getRightChild());
+    }
+  }
+
+  // 前序遍历
+  public void preOrder(Node current) {
+    if (null != current) {
+      System.out.println(current.getData() + "");
+      preOrder(current.getLeftChild());
+      preOrder(current.getRightChild());
     }
   }
 }

@@ -39,7 +39,13 @@ public class BinaryTreeTest {
 
   @Test
   public void testInfixOrder() {
-    Node node = new Node(4);
+    Node node = btree.find(7);
     btree.infixOrder(node);
+  }
+
+  @Test
+  public void testPreOrder() {
+    Node node = btree.find(7);
+    btree.preOrder(node);
   }
 }
