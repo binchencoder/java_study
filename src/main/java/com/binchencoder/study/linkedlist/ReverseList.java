@@ -32,4 +32,29 @@ public class ReverseList {
 
     return prev;
   }
+
+  Node reverseList1(Node head) {
+    Node pre = null;
+    Node curr = head;
+    Node next;
+    while (null != curr) {
+      next = curr.getNext();
+      curr.setNext(pre);
+      pre = curr;
+      curr = next;
+    }
+
+    return pre;
+  }
+
+  Node reverseList2(Node head) {
+    if (null == head || null == head.getNext()) {
+      return head;
+    }
+
+    Node node = reverseList2(head.getNext());
+    head.getNext().setNext(head);
+    head.setNext(null);
+    return node;
+  }
 }
