@@ -48,4 +48,10 @@ public class BinaryTreeTest {
     Node node = btree.find(7);
     btree.preOrder(node);
   }
+
+  @Test
+  public void testPostOrder() {
+    Node node = btree.find(7);
+    btree.postOrder(node);
+  }
 }

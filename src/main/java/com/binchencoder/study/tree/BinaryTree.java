@@ -75,4 +75,12 @@ public class BinaryTree implements Tree {
       preOrder(current.getRightChild());
     }
   }
+
+  public void postOrder(Node current) {
+    if (null != current) {
+      postOrder(current.getLeftChild());
+      postOrder(current.getRightChild());
+      System.out.println(current.getData() + "");
+    }
+  }
 }
